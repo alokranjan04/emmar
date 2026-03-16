@@ -13,7 +13,7 @@ import {
     ArrowRight
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Lead } from '@/types/agent-ui/types';
+import { Lead } from '@vadmin/types/agent-ui/types';
 
 interface LeadsDashboardProps {
     leads: Lead[];

@@ -1,5 +1,5 @@
 import React from 'react';
-import { BusinessConfig } from '@/types/agent-ui/types';
+import { BusinessConfig } from '@vadmin/types/agent-ui/types';
 import { MapPin, Clock, Phone, Mail, Award, Calendar, CheckCircle2 } from 'lucide-react';
 
 interface InfoPanelProps {

@@ -1,5 +1,5 @@
 import Vapi from '@vapi-ai/web';
-import { BusinessConfig } from '@/types/agent-ui/types';
+import { BusinessConfig } from '@vadmin/types/agent-ui/types';
 import { calendarService } from './calendarService';
 
 export interface LogEntry {

@@ -1,11 +1,11 @@
 "use client";
 
 import React from 'react';
-import ThreeDElement from '@/components/ThreeDElement';
-import AgencyLeadForm from '@/components/AgencyLeadForm';
+import ThreeDElement from '@vadmin/components/ThreeDElement';
+import AgencyLeadForm from '@vadmin/components/AgencyLeadForm';
 import { Bot, PhoneCall, CalendarCheck, Sparkles, Linkedin, Mail, Menu, X } from 'lucide-react';
 import { sendGAEvent } from '@next/third-parties/google';
-import DemoCallButton from '@/components/DemoCallButton';
+import DemoCallButton from '@vadmin/components/DemoCallButton';
 
 export default function AgencyLandingPage() {
     const [isMounted, setIsMounted] = React.useState(false);

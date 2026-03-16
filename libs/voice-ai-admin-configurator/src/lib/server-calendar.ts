@@ -1,4 +1,4 @@
-import { BusinessConfig } from '@/types/agent-ui/types';
+import { BusinessConfig } from '@vadmin/types/agent-ui/types';
 
 const CALENDAR_ID = 'primary';
 

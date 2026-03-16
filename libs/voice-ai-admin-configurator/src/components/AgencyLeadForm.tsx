@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Loader2, CheckCircle, ArrowRight, Phone, Mail, Sparkles, Building2 } from 'lucide-react';
 import { sendGAEvent } from '@next/third-parties/google';
-import { SUPPORTED_INDUSTRIES } from '@/types';
+import { SUPPORTED_INDUSTRIES } from '@vadmin/types';
 
 type DeliveryOption = 'email' | 'call';
 

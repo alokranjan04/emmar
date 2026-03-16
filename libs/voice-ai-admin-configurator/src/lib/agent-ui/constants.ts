@@ -1,4 +1,4 @@
-import { BusinessConfig } from '@/types/agent-ui/types';
+import { BusinessConfig } from '@vadmin/types/agent-ui/types';
 
 // Default configuration serves as a fallback or placeholder while fetching from Firebase.
 export const DEFAULT_BUSINESS_CONFIG: BusinessConfig = {

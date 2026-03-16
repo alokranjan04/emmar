@@ -1,8 +1,8 @@
 import { GoogleGenAI, LiveServerMessage, Modality, Type, FunctionDeclaration, Tool } from "@google/genai";
-import { generateSystemInstruction } from '@/lib/agent-ui/constants';
+import { generateSystemInstruction } from '@vadmin/lib/agent-ui/constants';
 import { firebaseService } from './firebaseService';
 import { calendarService } from './calendarService';
-import { BusinessConfig } from '@/types/agent-ui/types';
+import { BusinessConfig } from '@vadmin/types/agent-ui/types';
 import { createPcmBlob, decodeAudioData, decodeBase64 } from './audioUtils';
 
 export interface LogEntry {

@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { checkAvailability, findAvailableSlots, createEvent, cancelEvent } from '@/services/calendarService';
+import { checkAvailability, findAvailableSlots, createEvent, cancelEvent } from '@vadmin/services/calendarService';
 
 export async function POST(req: NextRequest) {
     try {

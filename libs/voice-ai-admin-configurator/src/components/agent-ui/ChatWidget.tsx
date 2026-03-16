@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { MessageSquare, X, Send, Phone, Mic, MicOff, ChevronDown, User, Bot, Info, Terminal, Calendar, Wrench } from 'lucide-react';
-import { voiceService, LogEntry } from '@/services/agent-ui/vapiService';
+import { voiceService, LogEntry } from '@vadmin/services/agent-ui/vapiService';
 import LiveVisualizer from './LiveVisualizer';
 import { WelcomeForm } from './WelcomeForm';
-import { formatMessage, renderFormattedMessage } from '@/utils/agent-ui/messageFormatter';
-import { BusinessConfig } from '@/types/agent-ui/types';
+import { formatMessage, renderFormattedMessage } from '@vadmin/utils/agent-ui/messageFormatter';
+import { BusinessConfig } from '@vadmin/types/agent-ui/types';
 
 interface ChatWidgetProps {
     config: BusinessConfig;
@@ -37,7 +37,7 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({ config, status, volume, logs, o
 
         // Save user details to Firebase transcriber configuration
         try {
-            const { firebaseService } = await import('@/services/agent-ui/firebaseService');
+            const { firebaseService } = await import('@vadmin/services/agent-ui/firebaseService');
             await firebaseService.updateTranscriberUserDetails(data.name, data.email || '', data.phone);
             console.log('[WelcomeForm] User details saved to Firebase transcriber');
         } catch (error) {

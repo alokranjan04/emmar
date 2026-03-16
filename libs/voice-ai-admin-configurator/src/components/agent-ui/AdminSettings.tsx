@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { X, Save, Check, Calendar as CalendarIcon, AlertTriangle, Shield, Zap, Copy, MessageSquare } from 'lucide-react';
-import { BusinessConfig } from '@/types/agent-ui/types';
-import { firebaseService } from '@/services/agent-ui/firebaseService';
-import { calendarService } from '@/services/agent-ui/calendarService';
-import { DEFAULT_BUSINESS_CONFIG } from '@/lib/agent-ui/constants';
+import { BusinessConfig } from '@vadmin/types/agent-ui/types';
+import { firebaseService } from '@vadmin/services/agent-ui/firebaseService';
+import { calendarService } from '@vadmin/services/agent-ui/calendarService';
+import { DEFAULT_BUSINESS_CONFIG } from '@vadmin/lib/agent-ui/constants';
 
 interface AdminSettingsProps {
     isOpen: boolean;

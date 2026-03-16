@@ -1,8 +1,8 @@
 import { NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
-import { researchBusiness } from '@/services/researchService';
-import { summarizeBusinessResearch, extractServicesFromResearch, generateIndustryFAQs, generateCustomerIntentQuestionnaire } from '@/services/geminiService';
-import { adminDb } from '@/lib/firebase-admin';
+import { researchBusiness } from '@vadmin/services/researchService';
+import { summarizeBusinessResearch, extractServicesFromResearch, generateIndustryFAQs, generateCustomerIntentQuestionnaire } from '@vadmin/services/geminiService';
+import { adminDb } from '@vadmin/lib/firebase-admin';
 
 export const dynamic = 'force-dynamic';
 

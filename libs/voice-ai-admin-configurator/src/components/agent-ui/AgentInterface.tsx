@@ -2,11 +2,11 @@
 
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useSearchParams, useParams, useRouter } from 'next/navigation';
-import InfoPanel from '@/components/agent-ui/InfoPanel';
-import LiveVisualizer from '@/components/agent-ui/LiveVisualizer';
-import AdminSettings from '@/components/agent-ui/AdminSettings';
-import ErrorBoundary from '@/components/agent-ui/ErrorBoundary';
-// import { WelcomeForm } from '@/components/agent-ui/WelcomeForm'; // Not used in rendered JSX? functionality seems embedded or missing usage in App.tsx excerpt? 
+import InfoPanel from '@vadmin/components/agent-ui/InfoPanel';
+import LiveVisualizer from '@vadmin/components/agent-ui/LiveVisualizer';
+import AdminSettings from '@vadmin/components/agent-ui/AdminSettings';
+import ErrorBoundary from '@vadmin/components/agent-ui/ErrorBoundary';
+// import { WelcomeForm } from '@vadmin/components/agent-ui/WelcomeForm'; // Not used in rendered JSX? functionality seems embedded or missing usage in App.tsx excerpt? 
 // Ah, App.tsx line 7 imported it, line 60 used state showWelcomeForm, but line 273 handleWelcomeFormSubmit defined.
 // The JSX was NOT in the previous view's snippet for WelcomeForm rendering? 
 // Wait, looking at App.tsx again. 
@@ -21,13 +21,13 @@ import ErrorBoundary from '@/components/agent-ui/ErrorBoundary';
 // Maybe it was removed? 
 // I'll import it just in case, but comment it out if unused.
 
-import { voiceService, LogEntry } from '@/services/agent-ui/vapiService';
-import { calendarService } from '@/services/agent-ui/calendarService';
-import { firebaseService } from '@/services/agent-ui/firebaseService';
-import { formatMessage, renderFormattedMessage } from '@/utils/agent-ui/messageFormatter';
+import { voiceService, LogEntry } from '@vadmin/services/agent-ui/vapiService';
+import { calendarService } from '@vadmin/services/agent-ui/calendarService';
+import { firebaseService } from '@vadmin/services/agent-ui/firebaseService';
+import { formatMessage, renderFormattedMessage } from '@vadmin/utils/agent-ui/messageFormatter';
 import { Mic, MicOff, AlertCircle, Phone, Terminal, User, Bot, Info, Settings, ShieldCheck, CheckCircle2, Globe, KeyRound, ChevronDown } from 'lucide-react';
-import { DEFAULT_BUSINESS_CONFIG } from '@/lib/agent-ui/constants';
-import { BusinessConfig } from '@/types/agent-ui/types';
+import { DEFAULT_BUSINESS_CONFIG } from '@vadmin/lib/agent-ui/constants';
+import { BusinessConfig } from '@vadmin/types/agent-ui/types';
 
 // Fallback Keys
 const FALLBACK_GOOGLE_CLIENT_ID = "";

@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { adminDb } from '@/lib/firebase-admin';
+import { adminDb } from '@vadmin/lib/firebase-admin';
 
 /**
  * API Route to cleanup temporary "Test Drive" agents from Vapi and Firebase.

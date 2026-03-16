@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
-import { checkAvailability, findAvailableSlots, createEvent, cancelEvent } from '@/services/calendarService';
+import { checkAvailability, findAvailableSlots, createEvent, cancelEvent } from '@vadmin/services/calendarService';
 
 export async function POST(req: NextRequest) {
     try {
@@ -29,7 +29,7 @@ export async function POST(req: NextRequest) {
             console.log(`[Vapi Webhook] Processing end-of-call. Assistant: ${assistantId}, Metadata Email: ${customerEmail}`);
 
             // 1. Persist to Database (Firebase Admin) and Fetch Missing Metadata
-            const { adminDb } = await import('@/lib/firebase-admin');
+            const { adminDb } = await import('@vadmin/lib/firebase-admin');
             if (adminDb) {
                 try {
                     // Update the Lead/Assistant record if it exists

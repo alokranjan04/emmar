@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import Script from 'next/script';
-import { AgentConfiguration } from '@/types';
+import { AgentConfiguration } from '@vadmin/types';
 
 export default function BusinessLandingPage() {
     const params = useParams();
@@ -20,7 +20,7 @@ export default function BusinessLandingPage() {
         async function fetchConfig() {
             try {
                 const response = await fetch(`/api/agent/${orgId}/${agentId}`);
-                
+
                 // Defensive check before parsing JSON
                 const contentType = response.headers.get("content-type");
                 if (!contentType || !contentType.includes("application/json")) {
@@ -83,12 +83,12 @@ export default function BusinessLandingPage() {
                 primaryColor: '#667eea',
                 secondaryColor: '#764ba2'
             };
-            
+
             (window as any).VOICE_WIDGET_CONFIG = widgetConfig;
-            
+
             // Notify the widget if it's already loaded
-            window.dispatchEvent(new CustomEvent('VOICE_WIDGET_UPDATE', { 
-                detail: widgetConfig 
+            window.dispatchEvent(new CustomEvent('VOICE_WIDGET_UPDATE', {
+                detail: widgetConfig
             }));
         }
 
@@ -151,7 +151,7 @@ export default function BusinessLandingPage() {
                     <div className="bg-red-500/10 border border-red-500/20 p-8 rounded-[2rem] backdrop-blur-xl">
                         <h1 className="text-4xl font-black text-white mb-2 uppercase tracking-tighter">Business Not Found</h1>
                         <p className="text-gray-400 text-xs font-medium mb-6">The requested agent could not be synchronized.</p>
-                        
+
                         {errorDetails && (
                             <div className="bg-black/40 p-4 rounded-xl text-left border border-white/5 mb-6">
                                 <p className="text-[10px] font-black text-red-400 uppercase tracking-widest mb-2">Debug Info</p>
@@ -160,8 +160,8 @@ export default function BusinessLandingPage() {
                                 </pre>
                             </div>
                         )}
-                        
-                        <button 
+
+                        <button
                             onClick={() => window.location.reload()}
                             className="w-full bg-white/5 hover:bg-white/10 text-white font-black py-4 rounded-xl border border-white/10 transition-all text-xs uppercase tracking-widest"
                         >
@@ -207,9 +207,9 @@ export default function BusinessLandingPage() {
                                 Start Voice Conversation
                             </button>
                             {(() => {
-                                const phoneNum = (locations.length > 0 && (locations[0] as any).phone) 
+                                const phoneNum = (locations.length > 0 && (locations[0] as any).phone)
                                     || '+18205022243';
-                                
+
                                 return (
                                     <a
                                         href={`tel:${phoneNum}`}
@@ -318,8 +318,8 @@ export default function BusinessLandingPage() {
             </footer>
 
             {/* Voice Bot Widget Script */}
-            <Script 
-                src="/voice-widget-v3.js" 
+            <Script
+                src="/voice-widget-v3.js"
                 strategy="afterInteractive"
                 onLoad={() => {
                     console.log("[Business Page] Voice widget script loaded successfully.");
@@ -333,7 +333,7 @@ export default function BusinessLandingPage() {
                             primaryColor: '#667eea',
                             secondaryColor: '#764ba2'
                         };
-                        window.dispatchEvent(new CustomEvent('VOICE_WIDGET_UPDATE', { 
+                        window.dispatchEvent(new CustomEvent('VOICE_WIDGET_UPDATE', {
                             detail: widgetConfig
                         }));
                     }

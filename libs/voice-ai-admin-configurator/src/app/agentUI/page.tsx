@@ -1,4 +1,4 @@
-import AgentInterface from '@/components/agent-ui/AgentInterface';
+import AgentInterface from '@vadmin/components/agent-ui/AgentInterface';
 import { Suspense } from 'react';
 
 export default function AgentPage() {

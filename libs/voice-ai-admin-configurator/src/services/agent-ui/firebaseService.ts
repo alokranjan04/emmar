@@ -1,8 +1,8 @@
 import { collection, addDoc, getDocs, getDoc, serverTimestamp, setDoc, doc, query, orderBy, limit, onSnapshot } from 'firebase/firestore';
-import { db } from '@/services/firebase'; // Use shared instance
+import { db } from '@vadmin/services/firebase'; // Use shared instance
 import { LogEntry } from './geminiLiveService';
-import { BusinessConfig } from '@/types/agent-ui/types';
-import { DEFAULT_BUSINESS_CONFIG } from '@/lib/agent-ui/constants';
+import { BusinessConfig } from '@vadmin/types/agent-ui/types';
+import { DEFAULT_BUSINESS_CONFIG } from '@vadmin/lib/agent-ui/constants';
 
 // Robust Timestamp Calculator - SANITIZED PRIORITY
 const getDocumentTimestamp = (doc: any) => {

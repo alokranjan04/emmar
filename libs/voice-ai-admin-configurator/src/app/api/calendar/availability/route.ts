@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { getCalendarClient, getCalendarId } from '@/lib/googleAuth';
+import { getCalendarClient, getCalendarId } from '@vadmin/lib/googleAuth';
 
 export async function GET(req: Request) {
     try {

@@ -1,17 +1,17 @@
 "use client";
 
 import React, { useState, useRef, useEffect } from 'react';
-import { Sidebar } from '@/components/Sidebar';
-import { LoginScreen } from '@/components/LoginScreen';
-import { CalendarView } from '@/components/CalendarView';
-import LeadsDashboard from '@/components/LeadsDashboard';
-import { generateConfigFromDescription } from '@/services/geminiService';
-import { saveConfiguration, auth, loginWithGoogle, logoutUser, getOrgId, getBranding, saveBranding } from '@/services/firebase';
-import { firebaseService } from '@/services/agent-ui/firebaseService';
-import { createVapiAssistant } from '@/services/vapiService';
-import { researchBusiness } from '@/services/researchService';
-import { getTemplateByIndustry } from '@/services/templateService';
-import { AgentConfiguration, INITIAL_CONFIG, DeliveryModeType, SUPPORTED_INDUSTRIES, BrandingConfig, DEFAULT_BRANDING, Lead } from '@/types';
+import { Sidebar } from '@vadmin/components/Sidebar';
+import { LoginScreen } from '@vadmin/components/LoginScreen';
+import { CalendarView } from '@vadmin/components/CalendarView';
+import LeadsDashboard from '@vadmin/components/LeadsDashboard';
+import { generateConfigFromDescription } from '@vadmin/services/geminiService';
+import { saveConfiguration, auth, loginWithGoogle, logoutUser, getOrgId, getBranding, saveBranding } from '@vadmin/services/firebase';
+import { firebaseService } from '@vadmin/services/agent-ui/firebaseService';
+import { createVapiAssistant } from '@vadmin/services/vapiService';
+import { researchBusiness } from '@vadmin/services/researchService';
+import { getTemplateByIndustry } from '@vadmin/services/templateService';
+import { AgentConfiguration, INITIAL_CONFIG, DeliveryModeType, SUPPORTED_INDUSTRIES, BrandingConfig, DEFAULT_BRANDING, Lead } from '@vadmin/types';
 import { Wand2, Plus, Trash2, Loader2, AlertCircle, Copy, Check, Database, Calendar, Bot, Rocket, Braces, Search, Upload, Palette, Image as ImageIcon, Phone, PhoneCall, Link, Globe, ShieldCheck, Settings2, Users, MessageSquare } from 'lucide-react';
 import { onAuthStateChanged, User } from 'firebase/auth';
 import { loadStripe } from '@stripe/stripe-js';
@@ -217,7 +217,7 @@ export default function AdminPage() {
     const loadOrgData = async () => {
         setIsBrandingLoading(true);
         try {
-            const { getOrgData } = await import('@/services/firebase');
+            const { getOrgData } = await import('@vadmin/services/firebase');
             const data = await getOrgData();
             if (data) {
                 if (data.branding) setBranding(data.branding);
@@ -236,12 +236,12 @@ export default function AdminPage() {
             const orgId = getOrgId(user);
             // 1. Save branding settings
             await saveBranding(branding);
-            
+
             // 2. Also save current configuration to persist avatarUrl and metadata
             if (activeAgentId || !isDemoMode) {
                 await saveConfiguration(config);
             }
-            
+
             alert("All settings including Branding and Bot Face have been saved!");
         } catch (error: any) {
             alert("Error saving: " + error.message);
@@ -325,7 +325,7 @@ export default function AdminPage() {
 
     const loadAgents = async () => {
         try {
-            const { getAgents } = await import('@/services/firebase');
+            const { getAgents } = await import('@vadmin/services/firebase');
             const list = await getAgents();
             setAgents(list);
         } catch (error) {
@@ -335,7 +335,7 @@ export default function AdminPage() {
 
     const selectAgent = async (agentId: string) => {
         try {
-            const { getAgentConfig } = await import('@/services/firebase');
+            const { getAgentConfig } = await import('@vadmin/services/firebase');
             const loadedConfig = await getAgentConfig(agentId);
             if (loadedConfig) {
                 setConfig(loadedConfig);
@@ -1089,10 +1089,10 @@ export default function AdminPage() {
 
                     <div className="space-y-4 p-4 bg-indigo-50 border border-indigo-100 rounded-xl mt-6">
                         <div className="flex items-center gap-2">
-                             <div className="p-2 bg-indigo-600 rounded-lg shadow-md shadow-indigo-200">
+                            <div className="p-2 bg-indigo-600 rounded-lg shadow-md shadow-indigo-200">
                                 <ImageIcon className="w-5 h-5 text-white" />
-                             </div>
-                             <h3 className="text-lg font-bold text-slate-800">Bot Personalization (Face of Agent)</h3>
+                            </div>
+                            <h3 className="text-lg font-bold text-slate-800">Bot Personalization (Face of Agent)</h3>
                         </div>
                         <div className="space-y-2">
                             <div className="flex items-center justify-between">

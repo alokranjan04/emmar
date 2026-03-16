@@ -13,8 +13,8 @@ import {
     CheckCircle2,
     ArrowRight
 } from 'lucide-react';
-import SutherlandLeadForm from '@/components/SutherlandLeadForm';
-import DemoCallButton from '@/components/DemoCallButton';
+import SutherlandLeadForm from '@vadmin/components/SutherlandLeadForm';
+import DemoCallButton from '@vadmin/components/DemoCallButton';
 import Image from 'next/image';
 
 const stats = [

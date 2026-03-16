@@ -1,7 +1,7 @@
 import { headers } from 'next/headers';
 import { NextResponse } from 'next/server';
-import { stripe } from '@/lib/stripe';
-import { adminDb } from '@/lib/firebase-admin';
+import { stripe } from '@vadmin/lib/stripe';
+import { adminDb } from '@vadmin/lib/firebase-admin';
 import Stripe from 'stripe';
 
 const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET;

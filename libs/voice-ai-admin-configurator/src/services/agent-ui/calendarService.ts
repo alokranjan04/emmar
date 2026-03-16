@@ -1,4 +1,4 @@
-import { BusinessConfig } from '@/types/agent-ui/types';
+import { BusinessConfig } from '@vadmin/types/agent-ui/types';
 
 // Use 'primary' to refer to the authenticated user's primary calendar
 const CALENDAR_ID = 'primary';
