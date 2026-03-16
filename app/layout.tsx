@@ -1,4 +1,4 @@
-import type {Metadata} from 'next';
+import type { Metadata } from 'next';
 import { Inter, Playfair_Display } from 'next/font/google';
 import './globals.css'; // Global styles
 import Script from 'next/script';
@@ -19,9 +19,9 @@ export const metadata: Metadata = {
   description: 'Discover world-class communities crafted by Emaar.',
 };
 
-export default function RootLayout({children}: {children: React.ReactNode}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-      <html lang="en" className={`${inter.variable} ${playfair.variable}`}>
+    <html lang="en" className={`${inter.variable} ${playfair.variable}`}>
       <body className="font-sans bg-[#FAF9F6] text-black antialiased" suppressHydrationWarning>
         {children}
         <Script id="voice-widget-config" strategy="afterInteractive">
@@ -36,7 +36,7 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
             };
           `}
         </Script>
-        <Script src="https://www.tellyourjourney.com/voice-widget.js" strategy="afterInteractive" />
+        <Script src="https://voice-ai-admin-536573436709.us-central1.run.app/voice-widget.js" strategy="afterInteractive" />
       </body>
     </html>
   );
