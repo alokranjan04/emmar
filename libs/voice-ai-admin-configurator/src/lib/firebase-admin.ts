@@ -1,0 +1,109 @@
+import * as admin from 'firebase-admin';
+
+if (!admin.apps.length) {
+    try {
+        const projectId = process.env.FIREBASE_PROJECT_ID || process.env.VITE_FIREBASE_PROJECT_ID || process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID;
+        const clientEmail = process.env.FIREBASE_CLIENT_EMAIL;
+        let privateKey = process.env.FIREBASE_PRIVATE_KEY;
+        let serviceAccountKey = process.env.FIREBASE_SERVICE_ACCOUNT_KEY;
+
+        // Base64 decoding fallbacks (to bypass truncation in production CLI)
+        if (!serviceAccountKey && process.env.FIREBASE_SERVICE_ACCOUNT_KEY_BASE64) {
+            console.log('[Firebase Admin] Decoding serviceAccountKey from Base64...');
+            serviceAccountKey = Buffer.from(process.env.FIREBASE_SERVICE_ACCOUNT_KEY_BASE64, 'base64').toString('utf8');
+        }
+        if (!privateKey && process.env.FIREBASE_PRIVATE_KEY_BASE64) {
+            console.log('[Firebase Admin] Decoding privateKey from Base64...');
+            privateKey = Buffer.from(process.env.FIREBASE_PRIVATE_KEY_BASE64, 'base64').toString('utf8');
+        }
+
+        let credential;
+
+        if (projectId && clientEmail && privateKey) {
+            console.log('[Firebase Admin] Using individual environment variables...');
+            credential = admin.credential.cert({
+                projectId,
+                clientEmail,
+                privateKey: privateKey.replace(/\\n/g, '\n'),
+            });
+        } else if (serviceAccountKey) {
+            console.log(`[Firebase Admin] Attempting JSON parse. String length: ${serviceAccountKey.length}`);
+            try {
+                let keyString = serviceAccountKey.trim();
+                
+                // Remove outer quotes if present (standard .env vs Vercel mismatch)
+                if ((keyString.startsWith("'") && keyString.endsWith("'")) || 
+                    (keyString.startsWith('"') && keyString.endsWith('"'))) {
+                    console.log('[Firebase Admin] Removing outer quotes from key string');
+                    keyString = keyString.slice(1, -1);
+                }
+
+                // Log boundaries for truncation check (safely)
+                console.log(`[Firebase Admin] Key Start: ${keyString.substring(0, 20)}...`);
+                console.log(`[Firebase Admin] Key End: ...${keyString.substring(keyString.length - 20)}`);
+
+                const serviceAccount = JSON.parse(keyString);
+                if (serviceAccount.private_key) {
+                    serviceAccount.private_key = serviceAccount.private_key.replace(/\\n/g, '\n');
+                }
+                credential = admin.credential.cert(serviceAccount);
+            } catch (e: any) {
+                console.error("[Firebase Admin] Failed to parse service account key.", {
+                    error: e.message,
+                    length: serviceAccountKey?.length,
+                    isJson: serviceAccountKey?.trim().startsWith('{')
+                });
+            }
+        }
+
+        if (credential) {
+            admin.initializeApp({
+                credential: credential,
+                projectId: projectId // Keep as fallback
+            });
+            console.log('[Firebase Admin] Initialized successfully.');
+        } else {
+            console.error("[Firebase Admin] CRITICAL: No credentials found.", {
+                hasProjectId: !!projectId,
+                hasServiceAccountKey: !!serviceAccountKey
+            });
+        }
+    } catch (error: any) {
+        console.error('[Firebase Admin] Initialization failed:', error);
+    }
+}
+
+
+// Lazy-loaded getters to ensure initialization is complete before access
+export const getAdminDb = () => {
+    if (!admin.apps.length) return null;
+    return admin.firestore();
+};
+
+export const getAdminAuth = () => {
+    if (!admin.apps.length) return null;
+    return admin.auth();
+};
+
+// For backward compatibility while we refactor, but it's risky
+export const adminDb = getAdminDb() as unknown as ReturnType<typeof admin.firestore>;
+export const adminAuth = getAdminAuth() as unknown as ReturnType<typeof admin.auth>;
+
+export { admin };
+
+// Helper function to fetch agent configuration
+export async function getAgentConfig(orgId: string, agentId: string) {
+    try {
+        const docRef = adminDb.collection('organizations').doc(orgId).collection('agents').doc(agentId);
+        const doc = await docRef.get();
+
+        if (!doc.exists) {
+            return null;
+        }
+
+        return doc.data() as any;
+    } catch (error) {
+        console.error('[Firebase Admin] Error fetching agent config:', error);
+        throw error;
+    }
+}
