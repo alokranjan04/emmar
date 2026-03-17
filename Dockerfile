@@ -1,5 +1,5 @@
 # Use the official Node.js 20 image as the base
-FROM node:20-slim AS base
+FROM node:20 AS base
 
 # 1. Install dependencies only when needed
 FROM base AS deps
@@ -10,7 +10,7 @@ COPY package.json package-lock.json* ./
 RUN npm ci
 
 # 2. Rebuild the source code only when needed
-FROM node:20 AS builder
+FROM base AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
